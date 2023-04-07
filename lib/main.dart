@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,24 +11,27 @@ class MyApp extends StatefulWidget {
     return _MyAppState();
     throw UnimplementedError();
   }
-
 }
-class _MyAppState extends State<MyApp>{
-   var _questionIndex=0;
-  void _answerQuestion(){
+
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
+  void _answerQuestion() {
     setState(() {
-       _questionIndex=_questionIndex+1;
+      _questionIndex = _questionIndex + 1;
     });
-  
+
     print('Answer chosesn');
   }
+
   @override
   Widget build(BuildContext context) {
-   
     var question = [
-      'what\'s your favorite number?',
-      'what\'s your favorite color?',
-      'what\'s your favorite animal?',
+      // 'what\'s your favorite number?',
+      // 'what\'s your favorite color?',
+      // 'what\'s your favorite animal?',
+      {},
+      {},
+      {},
     ];
     return MaterialApp(
       home: Scaffold(
@@ -35,11 +39,13 @@ class _MyAppState extends State<MyApp>{
           title: Text('My first App'),
         ),
         body: Column(children: [
-          Question(question[_questionIndex]),
-          ElevatedButton(child: Text('Answer 1'), onPressed: _answerQuestion),
-          ElevatedButton(child: Text('Answer 2'), onPressed: ()=>print('ok bro')),
-          ElevatedButton(child: Text('Answer 3'), onPressed: _answerQuestion),
-        ]),
+          Question(question[_questionIndex],
+          ),
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
+          Answer(_answerQuestion),
+        ],
+        ),
       ),
     );
     throw UnimplementedError();
