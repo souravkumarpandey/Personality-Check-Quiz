@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import 'result.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +14,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final _question = const [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Red', 'Green', 'white'],
+    },
+    {
+      'questionText': 'What\'s your  favrite animal?',
+      'answers': ['Rabbit', 'Snake', 'Lion', 'Elephant'],
+    },
+    {
+      'questionText': 'What\'s your favorite instructor?',
+      'answers': ['aniket', 'riik', 'sourv', 'rupesh'],
+    },
+  ];
   var _questionIndex = 0;
   void _answerQuestion() {
     setState(() {
@@ -25,36 +39,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var question = [
-      {
-        'questionText': 'What\'s your favorite color?',
-        'answers': ['Black', 'Red', 'Green', 'white'],
-      },
-      {
-        'questionText': 'What\'s your  favrite animal?',
-        'answers': ['Rabbit', 'Snake', 'Lion', 'Elephant'],
-      },
-      {
-        'questionText': 'What\'s your favorite instructor?',
-        'answers': ['aniket', 'riik', 'sourv', 'rupesh'],
-      },
-    ];
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('My first App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              question[_questionIndex]['questionText'],
-            ),
-            
-          ...(question[_questionIndex]['answers']as List<String>).map((answer){
-            return Answer(_answerQuestion,answer);
-          }).toList()
-          ],
-        ),
+        body: _questionIndex < _question.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                question: _question,
+              )
+            : Result(),
       ),
     );
     throw UnimplementedError();
